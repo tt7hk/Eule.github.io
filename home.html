@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eule.dev | Programming Services & Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --dark-bg: #0f0f23;
+            --darker-bg: #090915;
+            --card-bg: #1a1a2e;
+            --card-hover: #22223a;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --danger: #ef4444;
+            --border: #2d3748;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--darker-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Navbar */
+        .navbar {
+            background-color: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text) !important;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+        
+        .nav-link {
+            color: var(--text-muted) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--text) !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: calc(100% - 2rem);
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 100%);
+            padding: 8rem 0 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+            opacity: 0.1;
+            border-radius: 50%;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--text), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        /* Buttons */
+        .btn {
+            border-radius: 8px;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            background-color: var(--card-hover);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-header {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid var(--border);
+            padding: 1.25rem;
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+        }
+        
+        /* Pricing Cards */
+        .pricing-card {
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+        
+        .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+        
+        .form-control, .form-select {
+            background-color: var(--darker-bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background-color: var(--darker-bg);
+            border-color: var(--primary);
+            color: var(--text);
+            box-shadow: 0 0 0 0.25rem rgba(139, 92, 246, 0.25);
+        }
+        
+        /* Project Cards */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .project-img {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 35, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        /* Badges */
+        .badge {
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+        
+        .badge-primary {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--primary);
+        }
+        
+        .badge-secondary {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--secondary);
+        }
+        
+        /* Admin Dashboard */
+        .admin-sidebar {
+            background-color: var(--darker-bg);
+            min-height: calc(100vh - 76px);
+            padding: 2rem 0;
+            border-right: 1px solid var(--border);
+        }
+        
+        .admin-sidebar .nav-link {
+            color: var(--text-muted);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .admin-sidebar .nav-link i {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .admin-sidebar .nav-link:hover, .admin-sidebar .nav-link.active {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary);
+        }
+        
+        .dashboard-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            height: 100%;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--darker-bg);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-links h5 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Modals */
+        .modal-content {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text);
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .modal-footer {
+            border-top: 1px solid var(--border);
+        }
+        
+        .btn-close {
+            filter: invert(1);
+        }
+        
+        /* Language Selector */
+        .language-selector {
+            position: relative;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .language-btn:hover {
+            border-color: var(--primary);
+            color: var(--text);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            min-width: 150px;
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .language-selector:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .language-option {
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            text-decoration: none;
+            display: block;
+            transition: background 0.3s ease;
+        }
+        
+        .language-option:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        /* Security Badge */
+        .security-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        
+        .security-badge i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+            
+            .section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Security Badge -->
+    <div class="security-badge">
+        <i class="fas fa-shield-alt"></i> Secure Connection
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-code"></i> Eule.dev
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="language-selector me-3">
+                        <button class="language-btn">
+                            <i class="fas fa-globe me-2"></i> EN
+                        </button>
+                        <div class="language-dropdown">
+                            <a href="#" class="language-option">English</a>
+                            <a href="#" class="language-option">Français</a>
+                            <a href="#" class="language-option">Deutsch</a>
+                            <a href="#" class="language-option">Español</a>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">Register</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 fade-in">
+                    <h1 class="hero-title">Custom Programming Solutions</h1>
+                    <p class="hero-subtitle">Professional development services including web applications, automation scripts, Discord bots, and more. Built with modern technologies and security in mind.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#services" class="btn btn-primary btn-lg">Explore Services</a>
+                        <a href="#contact" class="btn btn-outline-primary btn-lg">Get in Touch</a>
+                    </div>
+                    <div class="mt-4 d-flex flex-wrap gap-3">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-shield-alt text-success me-2"></i>
+                            <span>Secure & Reliable</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-bolt text-warning me-2"></i>
+                            <span>Fast Development</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-headset text-info me-2"></i>
+                            <span>24/7 Support</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center mt-5 mt-lg-0 fade-in">
+                    <div class="position-relative">
+                        <div class="project-img rounded-3">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">Services</h2>
+            <p class="section-subtitle">Comprehensive programming solutions tailored to your needs. From simple scripts to complex applications.</p>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="card text-center h-100">
+                        <div class="card-body p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h5 class="card-title">Web Development</h5>
+                            <p class="card-text text-muted">Custom websites and web applications built with modern frameworks and responsive design principles.</p>
+                            <ul class="list-unstyled text-start mt-3">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Front-end & Back-end</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Responsive Design</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> API Integration</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Security Implementation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="card text-center h-100">
+                        <div class="card-body p-4">
+                            <div class="service-icon">
+                                <i class="fab fa-discord"></i>
+                            </div>
+                            <h5 class="card-title">Discord Bots</h5>
+                            <p class="card-text text-muted">Custom Discord bots with moderation, automation, gaming, and utility features tailored to your community.</p>
+                            <ul class="list-unstyled text-start mt-3">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Moderation Tools</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Custom Commands</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> API Integrations</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> User Management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4 fade-in">
+                    <div class="card text-center h-100">
+                        <div class="card-body p-4">
+                            <div class="service-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h5 class="card-title">Automation Scripts</h5>
+                            <p class="card-text text-muted">Python, JavaScript, and PowerShell scripts to automate repetitive tasks and streamline workflows.</p>
+                            <ul class="list-unstyled text-start mt-3">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Data Processing</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> System Administration</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Web Scraping</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Task Automation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section bg-darker">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">Check out some of my recent work. Use filters to find exactly what you're looking for.</p>
+            
+            <!-- Filter Section -->
+            <div class="filter-section fade-in">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label for="projectType" class="form-label">Project Type</label>
+                        <select class="form-select" id="projectType">
+                            <option value="all">All Types</option>
+                            <option value="web">Web Applications</option>
+                            <option value="bot">Discord Bots</option>
+                            <option value="script">Automation Scripts</option>
+                            <option value="mobile">Mobile Apps</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="technology" class="form-label">Technology</label>
+                        <select class="form-select" id="technology">
+                            <option value="all">All Technologies</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="python">Python</option>
+                            <option value="java">Java</option>
+                            <option value="csharp">C#</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="complexity" class="form-label">Complexity</label>
+                        <select class="form-select" id="complexity">
+                            <option value="all">All Levels</option>
+                            <option value="simple">Simple</option>
+                            <option value="medium">Medium</option>
+                            <option value="complex">Complex</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button class="btn btn-primary w-100" id="applyFilters">Apply Filters</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Projects Grid -->
+            <div class="row" id="projectsGrid">
+                <div class="col-lg-4 col-md-6 mb-4 project-card fade-in" data-type="web" data-tech="javascript" data-complexity="medium">
+                    <div class="card h-100">
+                        <div class="project-img">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">E-Commerce Platform</h5>
+                            <p class="card-text text-muted">Full-featured online store with payment processing and inventory management.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge badge-primary">React</span>
+                                <span class="badge badge-primary">Node.js</span>
+                                <span class="badge badge-secondary">MongoDB</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Completed: Jan 2023</small>
+                                <span class="badge bg-success">Live</span>
+                            </div>
+                        </div>
+                        <div class="project-overlay">
+                            <h5>E-Commerce Platform</h5>
+                            <p class="text-muted">Complete online shopping solution with admin dashboard and analytics.</p>
+                            <a href="#" class="btn btn-primary mt-2">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 project-card fade-in" data-type="bot" data-tech="python" data-complexity="simple">
+                    <div class="card h-100">
+                        <div class="project-img">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Community Mod Bot</h5>
+                            <p class="card-text text-muted">Discord moderation bot with auto-moderation and user management features.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge badge-primary">Python</span>
+                                <span class="badge badge-secondary">Discord.py</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Completed: Mar 2023</small>
+                                <span class="badge bg-success">Live</span>
+                            </div>
+                        </div>
+                        <div class="project-overlay">
+                            <h5>Community Mod Bot</h5>
+                            <p class="text-muted">Automated moderation with custom commands and logging system.</p>
+                            <a href="#" class="btn btn-primary mt-2">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4 project-card fade-in" data-type="script" data-tech="python" data-complexity="medium">
+                    <div class="card h-100">
+                        <div class="project-img">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Data Processing Script</h5>
+                            <p class="card-text text-muted">Automated data extraction and transformation from multiple sources.</p>
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                <span class="badge badge-primary">Python</span>
+                                <span class="badge badge-secondary">Pandas</span>
+                                <span class="badge badge-primary">API</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">Completed: Feb 2023</small>
+                                <span class="badge bg-success">Live</span>
+                            </div>
+                        </div>
+                        <div class="project-overlay">
+                            <h5>Data Processing Script</h5>
+                            <p class="text-muted">Automates data collection and formatting for reporting purposes.</p>
+                            <a href="#" class="btn btn-primary mt-2">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section">
+        <div class="container">
+            <h2 class="section-title">Pricing Plans</h2>
+            <p class="section-subtitle">Choose the plan that fits your needs. All plans include basic support and security features.</p>
+            
+            <div class="row">
+                <div class="col-lg-4 mb-4 fade-in">
+                    <div class="card pricing-card text-center h-100">
+                        <div class="card-header py-4">
+                            <h5>Basic</h5>
+                            <div class="price mt-3"><span class="h1">$49</span><span class="text-muted">/project</span></div>
+                            <p class="text-muted mt-2">Perfect for small projects and simple scripts</p>
+                        </div>
+                        <div class="card-body p-4">
+                            <ul class="list-unstyled mb-4 text-start">
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Simple Scripts & Bots</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Basic Discord Bots</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 1 Revision</li>
+                                <li class="mb-3"><i class="fas fa-times text-muted me-2"></i> <del>Priority Support</del></li>
+                                <li class="mb-3"><i class="fas fa-times text-muted me-2"></i> <del>Source Code</del></li>
+                                <li class="mb-3"><i class="fas fa-times text-muted me-2"></i> <del>Security Audit</del></li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Select Plan</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4 fade-in">
+                    <div class="card pricing-card text-center h-100 featured">
+                        <div class="card-header py-4">
+                            <h5>Professional</h5>
+                            <div class="price mt-3"><span class="h1">$149</span><span class="text-muted">/project</span></div>
+                            <p class="text-muted mt-2">Ideal for most web applications and complex bots</p>
+                        </div>
+                        <div class="card-body p-4">
+                            <ul class="list-unstyled mb-4 text-start">
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Web Applications</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Advanced Discord Bots</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 3 Revisions</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Priority Support</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Source Code</li>
+                                <li class="mb-3"><i class="fas fa-times text-muted me-2"></i> <del>Security Audit</del></li>
+                            </ul>
+                            <a href="#" class="btn btn-primary w-100">Select Plan</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4 fade-in">
+                    <div class="card pricing-card text-center h-100">
+                        <div class="card-header py-4">
+                            <h5>Enterprise</h5>
+                            <div class="price mt-3"><span class="h1">Custom</span></div>
+                            <p class="text-muted mt-2">For large-scale projects with complex requirements</p>
+                        </div>
+                        <div class="card-body p-4">
+                            <ul class="list-unstyled mb-4 text-start">
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Complex Systems</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Multiple Integrations</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Unlimited Revisions</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> 24/7 Support</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Source Code</li>
+                                <li class="mb-3"><i class="fas fa-check text-success me-2"></i> Security Audit</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-darker">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Have a project in mind? Let's discuss how we can work together to bring your ideas to life.</p>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card">
+                        <div class="card-body p-4 p-md-5">
+                            <form id="contactForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="name" class="form-label">Full Name</label>
+                                            <input type="text" class="form-control" id="name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" id="email" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="privacyPolicy" required>
+                                        <label class="form-check-label" for="privacyPolicy">
+                                            I agree to the <a href="#" class="text-primary">Privacy Policy</a> and <a href="#" class="text-primary">Terms of Service</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="d-flex align-items-center mb-3"><i class="fas fa-code me-2 text-primary"></i>Eule.dev</h5>
+                    <p class="text-muted">Professional programming services and custom solutions for your business needs.</p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-muted"><i class="fab fa-github fa-lg"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-discord fa-lg"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-linkedin fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Services</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Discord Bots</a></li>
+                        <li><a href="#">Automation Scripts</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5>Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Projects</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Newsletter</h5>
+                    <p class="text-muted">Subscribe to get updates on new services and projects.</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your email">
+                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                    <div class="d-flex align-items-center text-muted">
+                        <i class="fas fa-shield-alt text-success me-2"></i>
+                        <span>Your data is secure and protected</span>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0 text-muted">&copy; 2023 Eule.dev. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-muted text-decoration-none me-3">Privacy Policy</a>
+                    <a href="#" class="text-muted text-decoration-none">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login to Your Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-primary text-decoration-none">Forgot your password?</a>
+                    </div>
+                    <div class="text-center mt-3">
+                        <span class="text-muted">Don't have an account? </span>
+                        <a href="#" class="text-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#registerModal">Sign up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Create an Account</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                            <div class="form-text text-muted">Password must be at least 8 characters with uppercase, lowercase, and numbers.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">
+                                I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a>
+                            </label>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Create Account</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <span class="text-muted">Already have an account? </span>
+                        <a href="#" class="text-primary text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard (Hidden by default) -->
+    <div id="adminDashboard" class="d-none">
+        <nav class="navbar navbar-dark bg-darker">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-code me-2"></i>Eule.dev <span class="badge bg-primary ms-2">Admin</span>
+                </a>
+                <button class="btn btn-outline-light" onclick="toggleAdminView()">
+                    <i class="fas fa-times me-2"></i> Exit Admin
+                </button>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 admin-sidebar">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-users"></i> Users
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-project-diagram"></i> Projects
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-shopping-cart"></i> Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-shield-alt"></i> Security
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-10 py-4">
+                    <h2 class="mb-4">Admin Dashboard</h2>
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="dashboard-card stat-card">
+                                <h5>Total Users</h5>
+                                <div class="stat-number">124</div>
+                                <p class="text-muted">+12 this month</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="dashboard-card stat-card">
+                                <h5>Active Projects</h5>
+                                <div class="stat-number">18</div>
+                                <p class="text-muted">+3 this week</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="dashboard-card stat-card">
+                                <h5>Revenue</h5>
+                                <div class="stat-number">$3,240</div>
+                                <p class="text-muted">+$420 this month</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 mb-3">
+                            <div class="dashboard-card stat-card">
+                                <h5>Support Tickets</h5>
+                                <div class="stat-number">7</div>
+                                <p class="text-muted">2 awaiting response</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="dashboard-card">
+                                <h5 class="mb-3">Recent Projects</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Project</th>
+                                                <th>Client</th>
+                                                <th>Status</th>
+                                                <th>Due Date</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>E-Commerce Platform</td>
+                                                <td>John Smith</td>
+                                                <td><span class="badge bg-warning">In Progress</span></td>
+                                                <td>2023-06-15</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Discord Mod Bot</td>
+                                                <td>Gaming Community</td>
+                                                <td><span class="badge bg-success">Completed</span></td>
+                                                <td>2023-05-20</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Data Processing Script</td>
+                                                <td>Data Corp</td>
+                                                <td><span class="badge bg-info">Testing</span></td>
+                                                <td>2023-06-05</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="dashboard-card">
+                                <h5 class="mb-3">Quick Actions</h5>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary">Add New Project</button>
+                                    <button class="btn btn-outline-primary">Manage Users</button>
+                                    <button class="btn btn-outline-primary">View Reports</button>
+                                    <button class="btn btn-outline-primary">System Settings</button>
+                                </div>
+                                
+                                <h5 class="mt-4 mb-3">Security Status</h5>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Firewall</span>
+                                        <span class="text-success">Active</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>SSL Certificate</span>
+                                        <span class="text-success">Valid</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span>Backup</span>
+                                        <span class="text-success">Completed</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Malware Scan</span>
+                                        <span class="text-warning">Running</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Project filtering functionality
+        document.getElementById('applyFilters').addEventListener('click', function() {
+            const typeFilter = document.getElementById('projectType').value;
+            const techFilter = document.getElementById('technology').value;
+            const complexityFilter = document.getElementById('complexity').value;
+            
+            const projects = document.querySelectorAll('.project-card');
+            
+            projects.forEach(project => {
+                const type = project.getAttribute('data-type');
+                const tech = project.getAttribute('data-tech');
+                const complexity = project.getAttribute('data-complexity');
+                
+                const typeMatch = typeFilter === 'all' || type === typeFilter;
+                const techMatch = techFilter === 'all' || tech === techFilter;
+                const complexityMatch = complexityFilter === 'all' || complexity === complexityFilter;
+                
+                if (typeMatch && techMatch && complexityMatch) {
+                    project.style.display = 'block';
+                } else {
+                    project.style.display = 'none';
+                }
+            });
+        });
+
+        // Form validation and submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real application, this would send the form data to a server
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real application, this would authenticate the user
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simple validation (in a real app, this would be done server-side)
+            if (email && password) {
+                // Check if admin login
+                if (email === 'admin@eule.dev' && password === 'admin123') {
+                    document.getElementById('adminDashboard').classList.remove('d-none');
+                    document.querySelector('main').style.display = 'none';
+                    document.querySelector('footer').style.display = 'none';
+                    document.querySelector('.navbar').style.display = 'none';
+                    
+                    // Close modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                    modal.hide();
+                } else {
+                    alert('Login successful!');
+                    // Close modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                    modal.hide();
+                }
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real application, this would create a new user account
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Simple password validation
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long!');
+                return;
+            }
+            
+            alert('Account created successfully! You can now log in.');
+            
+            // Close modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('registerModal'));
+            modal.hide();
+        });
+
+        // Toggle admin view
+        function toggleAdminView() {
+            document.getElementById('adminDashboard').classList.add('d-none');
+            document.querySelector('main').style.display = 'block';
+            document.querySelector('footer').style.display = 'block';
+            document.querySelector('.navbar').style.display = 'flex';
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeInOnScroll = () => {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Set initial state for fade elements
+        fadeElements.forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+        
+        window.addEventListener('scroll', fadeInOnScroll);
+        // Initial check in case elements are already in view
+        fadeInOnScroll();
+    </script>
+</body>
+</html>
